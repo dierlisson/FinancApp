@@ -16,7 +16,7 @@ import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DashboardScreen(viewModel: DashboardViewModel) {
+fun DashboardScreen(viewModel: DashboardViewModel, onNavigateToAdd: () -> Unit) {
     // Observa os estados do ViewModel
     val transacoes by viewModel.transacoes.collectAsState()
     val saldo by viewModel.saldoTotal.collectAsState()
@@ -32,7 +32,7 @@ fun DashboardScreen(viewModel: DashboardViewModel) {
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { /* TODO: Navegar para Adicionar Transação */ }) {
+            FloatingActionButton(onClick = onNavigateToAdd) {
                 Text("+")
             }
         }

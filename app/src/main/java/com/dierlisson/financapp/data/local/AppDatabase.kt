@@ -19,10 +19,23 @@ abstract class AppDatabase : RoomDatabase() {
     companion object {
         @Volatile
         private var INSTANCE: AppDatabase? = null
-
         val MIGRATION_1_2 = object : Migration(1, 2) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE transacoes ADD COLUMN observacao TEXT")
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE transacoes ADD COLUMN observacao TEXT")
+            }
+        }
+
+        // NOVO: Callback para popular o banco de dados na primeira vez que ele é criado
+        private val roomCallback = object : RoomDatabase.Callback() {
+            override fun onCreate(db: SupportSQLiteDatabase) {
+                super.onCreate(db)
+                // Inserindo uma Conta padrão (Isso será o ID 1)
+                db.execSQL("INSERT INTO contas (nome, saldoAtual) VALUES ('Carteira Principal', 0.0)")
+
+                // Inserindo Categorias padrão (Isso serão os IDs 1, 2 e 3)
+                db.execSQL("INSERT INTO categorias (nome, tipo, icone) VALUES ('Alimentação', 'DESPESA', 0)")
+                db.execSQL("INSERT INTO categorias (nome, tipo, icone) VALUES ('Salário', 'RECEITA', 0)")
+                db.execSQL("INSERT INTO categorias (nome, tipo, icone) VALUES ('Lazer', 'DESPESA', 0)")
             }
         }
 
@@ -34,6 +47,7 @@ abstract class AppDatabase : RoomDatabase() {
                     "controle_financeiro_db"
                 )
                     .addMigrations(MIGRATION_1_2)
+                    .addCallback(roomCallback) // Registrando nosso Callback aqui
                     .build()
                 INSTANCE = instance
                 instance
