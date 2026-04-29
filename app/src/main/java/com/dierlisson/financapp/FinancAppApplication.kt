@@ -9,5 +9,11 @@ class FinancAppApplication : Application() {
     val database by lazy { AppDatabase.getDatabase(this) }
 
     // Instancia o repositório passando o DAO
-    val repository by lazy { TransacaoRepository(database.transacaoDao()) }
+    val repository by lazy {
+        TransacaoRepository(
+            transacaoDao = database.transacaoDao(),
+            categoriaDao = database.categoriaDao(),
+            contaDao = database.contaDao()
+        )
+    }
 }

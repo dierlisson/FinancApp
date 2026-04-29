@@ -8,6 +8,9 @@ interface TransacaoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(transacao: TransacaoEntity)
 
+    @Query("SELECT * FROM transacoes WHERE id = :id")
+    suspend fun getTransacaoById(id: Int): TransacaoEntity?
+
     @Update
     suspend fun update(transacao: TransacaoEntity)
 

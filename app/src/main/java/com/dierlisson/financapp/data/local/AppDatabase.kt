@@ -13,8 +13,8 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun transacaoDao(): TransacaoDao
-    // abstract fun contaDao(): ContaDao
-    // abstract fun categoriaDao(): CategoriaDao
+    abstract fun contaDao(): ContaDao
+    abstract fun categoriaDao(): CategoriaDao
 
     companion object {
         @Volatile

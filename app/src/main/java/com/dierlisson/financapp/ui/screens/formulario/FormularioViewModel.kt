@@ -1,26 +1,52 @@
 package com.dierlisson.financapp.ui.screens.formulario
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.dierlisson.financapp.data.local.TransacaoEntity
 import com.dierlisson.financapp.data.repository.TransacaoRepository
+import com.dierlisson.financapp.domain.model.Categoria
+import com.dierlisson.financapp.domain.model.Transacao
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.util.Date
 
 class FormularioViewModel(private val repository: TransacaoRepository) : ViewModel() {
 
+    var transacaoIdParaEdicao by mutableStateOf<Int?>(null)
+        private set
+
+    val categoriasDespesa: StateFlow<List<Categoria>> = repository.getCategorias("DESPESA")
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    val categoriasReceita: StateFlow<List<Categoria>> = repository.getCategorias("RECEITA")
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    fun carregarTransacao(id: Int) {
+        transacaoIdParaEdicao = id
+    }
+
+    suspend fun buscarTransacaoNoBanco(id: Int): Transacao? {
+        return repository.getTransacaoById(id)
+    }
+
     fun salvarTransacao(
         descricao: String,
         valor: Double,
         tipo: String,
+        categoriaId: Int,
         observacao: String,
         onSuccess: () -> Unit
     ) {
         viewModelScope.launch {
-            val novaTransacao = TransacaoEntity(
-                contaId = 1, // Temporário: Precisaremos criar uma Conta padrão depois
-                categoriaId = 1, // Temporário: Precisaremos criar Categorias padrão
+            val transacao = Transacao(
+                id = transacaoIdParaEdicao ?: 0,
+                contaId = 1, // Padrão
+                categoriaId = categoriaId,
                 valor = valor,
                 data = Date(),
                 tipo = tipo,
@@ -28,12 +54,14 @@ class FormularioViewModel(private val repository: TransacaoRepository) : ViewMod
                 observacao = observacao
             )
 
-            // Para não dar crash agora pelas Foreign Keys, vamos encapsular num try-catch temporário
             try {
-                repository.inserirTransacao(novaTransacao)
+                if (transacaoIdParaEdicao == null) {
+                    repository.inserirTransacao(transacao)
+                } else {
+                    repository.atualizarTransacao(transacao)
+                }
                 onSuccess()
             } catch (e: Exception) {
-                // Aqui depois vamos tratar o erro de "Conta/Categoria não encontrada"
                 e.printStackTrace()
             }
         }

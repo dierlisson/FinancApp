@@ -6,21 +6,6 @@ import androidx.room.PrimaryKey
 import androidx.room.Index
 import java.util.Date
 
-@Entity(tableName = "contas")
-data class ContaEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val nome: String,
-    val saldoAtual: Double
-)
-
-@Entity(tableName = "categorias")
-data class CategoriaEntity(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val nome: String,
-    val tipo: String, // "RECEITA" ou "DESPESA"
-    val icone: Int // ID do resource do ícone
-)
-
 @Entity(
     tableName = "transacoes",
     foreignKeys = [
@@ -37,5 +22,5 @@ data class TransacaoEntity(
     val data: Date,
     val tipo: String, // "RECEITA" ou "DESPESA"
     val descricao: String,
-    val observacao: String? = null // Adicionado para requisito de Migration
+    val observacao: String? = null
 )
