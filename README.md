@@ -16,9 +16,8 @@ O objetivo do aplicativo é permitir que o usuário gerencie sua saúde financei
 
 | Splash Screen | Dashboard (Resumo) | Lista de Transações | Nova Transação |
 |---|---|---|---|
-| ![Splash](.github/screenshots/splash.png) | ![Home](.github/screenshots/dashboard.png) | ![Lista](.github/screenshots/lista.png) | ![Form](.github/screenshots/form.png) |
+| <img  max-height="640" min-height="200" alt="splash" src="https://github.com/user-attachments/assets/855a12d9-3669-4e73-ab1e-13f248041def" /> | <img max-height="640" min-height="200" alt="resumo" src="https://github.com/user-attachments/assets/aa88f087-c982-4f21-80ae-5afa8879704e" /> | <img max-height="640" min-height="200" alt="transacoes" src="https://github.com/user-attachments/assets/e4f8486a-3151-4ced-ba47-6b6d102f22b0" /> | <img  width="240" min-height="200" alt="novatransacao" src="https://github.com/user-attachments/assets/6a6c8f9a-3b43-4b63-ab4c-109a6b01cb3d" /> |
 
-*(Nota: Substitua os links acima pelos caminhos das imagens que você capturar)*
 
 ---
 
@@ -91,10 +90,7 @@ O projeto foi construído seguindo os princípios da **Clean Architecture** e o 
 
 ---
 
-## 📥 Download
+## 👤 Autor
 
-A versão final compilada pode ser baixada através do link abaixo:
-
-[👉 Baixar APK (Versão Final)](https://github.com/dierlisson/FinancApp/releases)
-
+Desenvolvido por **Dierlisson Justiniano**.
 
