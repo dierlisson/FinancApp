@@ -18,9 +18,9 @@ O projeto foi construído com foco em organização de código, separação de r
 
 ## 📸 Demonstração
 
-| Splash Screen                                                                                                                                       | Dashboard                                                                                                                                       | Lista de transações                                                                                                                                       | Nova transação                                                                                                                                  |
-| --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| <img max-height="640" min-height="200" alt="Splash Screen" src="https://github.com/user-attachments/assets/855a12d9-3669-4e73-ab1e-13f248041def" /> | <img max-height="640" min-height="200" alt="Dashboard" src="https://github.com/user-attachments/assets/aa88f087-c982-4f21-80ae-5afa8879704e" /> | <img max-height="640" min-height="200" alt="Lista de transações" src="https://github.com/user-attachments/assets/e4f8486a-3151-4ced-ba47-6b6d102f22b0" /> | <img width="240" min-height="200" alt="Nova transação" src="https://github.com/user-attachments/assets/6a6c8f9a-3b43-4b63-ab4c-109a6b01cb3d" /> |
+| Splash Screen | Dashboard | Lista de transações | Nova transação |
+| :-----------: | :-------: | :-----------------: | :------------: |
+| <img src="assets/splash.gif" alt="Splash Screen" height="440"> | <img src="assets/dashboard.png" alt="Dashboard" height="440"> | <img src="assets/transactions.png" alt="Lista de transações" height="440"> | <img src="assets/new_transaction.gif" alt="Nova transação" height="440"> |
 
 ---
 
